@@ -37,12 +37,14 @@ resizeButton.addEventListener("click", () => {
 document.addEventListener("mousedown", (event) => {
     draw = true;
     event.target.classList.add("drawn");
+    event.target.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
 });
 document.addEventListener("mouseup", () => draw = false);
 
 document.addEventListener("mouseover", (event) => {
     if (draw) {
         event.target.classList.add("drawn");
+        event.target.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
     }
 })
 // draw = true on mousedown

@@ -4,6 +4,7 @@ const body = document.querySelector("body");
 
 makeGrid(16);
 let draw = false;
+let rainbow = false;
 
 function makeGrid(size) {
     const grid = document.createElement("div");
@@ -35,13 +36,18 @@ resizeButton.addEventListener("click", () => {
     if (size) makeGrid(size);
 })
 
+const rainbowButton = document.querySelector(".rainbowButton");
+rainbowButton.addEventListener("click", () => rainbow = !rainbow);
+
 document.addEventListener("mousedown", (event) => {
     draw = true;
     const box = event.target;
     box.classList.add("drawn");
-    let opacity = Number(box.dataset.opacity) + .10;
-    box.dataset.opacity = opacity;
-    box.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.min(opacity, 1)})`;
+    if (rainbow) {
+        let opacity = Number(box.dataset.opacity) + .10;
+        box.dataset.opacity = opacity;
+        box.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.min(opacity, 1)})`;
+    }
 });
 document.addEventListener("mouseup", () => draw = false);
 
@@ -49,10 +55,14 @@ document.addEventListener("mouseover", (event) => {
     if (draw) {
         const box = event.target;
         box.classList.add("drawn");
-        let opacity = Number(box.dataset.opacity) + .10;
-        box.dataset.opacity = opacity;
-        box.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.min(opacity, 1)})`;
+        if (rainbow) {
+            let opacity = Number(box.dataset.opacity) + .10;
+            box.dataset.opacity = opacity;
+            box.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.min(opacity, 1)})`;
+        }
     }
 })
+
+
 // draw = true on mousedown
 // event listener for hovering, when (draw) change color of target

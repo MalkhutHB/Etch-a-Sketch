@@ -13,6 +13,7 @@ function makeGrid(size) {
         for (let i=0; i<size/*size*/; i++) {
             const box = document.createElement("div");
             box.setAttribute("class", "box");
+            box.dataset.opacity = 0;
             row.appendChild(box);
         }
         row.setAttribute("class", "row");
@@ -36,15 +37,21 @@ resizeButton.addEventListener("click", () => {
 
 document.addEventListener("mousedown", (event) => {
     draw = true;
-    event.target.classList.add("drawn");
-    event.target.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
+    const box = event.target;
+    box.classList.add("drawn");
+    let opacity = Number(box.dataset.opacity) + .10;
+    box.dataset.opacity = opacity;
+    box.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.min(opacity, 1)})`;
 });
 document.addEventListener("mouseup", () => draw = false);
 
 document.addEventListener("mouseover", (event) => {
     if (draw) {
-        event.target.classList.add("drawn");
-        event.target.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256})`;
+        const box = event.target;
+        box.classList.add("drawn");
+        let opacity = Number(box.dataset.opacity) + .10;
+        box.dataset.opacity = opacity;
+        box.style.backgroundColor = `rgb(${Math.random() * 256}, ${Math.random() * 256}, ${Math.random() * 256}, ${Math.min(opacity, 1)})`;
     }
 })
 // draw = true on mousedown

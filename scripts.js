@@ -42,7 +42,8 @@ rainbowButton.addEventListener("click", () => rainbow = !rainbow);
 document.addEventListener("mousedown", (event) => {
     draw = true;
     const box = event.target;
-    box.classList.add("drawn");
+    if (!box.classList.contains("box")) return; // TRYNA FIX THE THINGY
+    box.style.backgroundColor = `rgb(0, 0, 0)`; 
     if (rainbow) {
         let opacity = Number(box.dataset.opacity) + .10;
         box.dataset.opacity = opacity;
@@ -54,7 +55,8 @@ document.addEventListener("mouseup", () => draw = false);
 document.addEventListener("mouseover", (event) => {
     if (draw) {
         const box = event.target;
-        box.classList.add("drawn");
+        if (!box.classList.contains("box")) return;
+        box.style.backgroundColor = `rgb(0, 0, 0)`;
         if (rainbow) {
             let opacity = Number(box.dataset.opacity) + .10;
             box.dataset.opacity = opacity;
